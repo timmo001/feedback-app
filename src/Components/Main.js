@@ -107,18 +107,18 @@ class Main extends React.Component {
                 justify="space-around">
                 <Grid item lg={2} md={4} sm={4} xs={6}>
                   <IconButton className={classes.iconButton} onClick={() => this.handleStatusChange(-1)}>
-                    <img src={MinusTwoIcon} width={100} alt="Very Unsatisfied" />
+                    <img src={MinusTwoIcon} width={100} alt="Very Dissatisfied" />
                   </IconButton>
                   <Typography className={classes.buttonText} variant="subheading" component="h3">
-                    Very Unsatisfied
+                    Very Dissatisfied
                   </Typography>
                 </Grid>
                 <Grid item lg={2} md={4} sm={4} xs={6}>
                   <IconButton className={classes.iconButton} onClick={() => this.handleStatusChange(-1)}>
-                    <img src={MinusOneIcon} width={100} alt="Unsatisfied" />
+                    <img src={MinusOneIcon} width={100} alt="Dissatisfied" />
                   </IconButton>
                   <Typography className={classes.buttonText} variant="subheading" component="h3">
-                    Unsatisfied
+                    Dissatisfied
                   </Typography>
                 </Grid>
                 <Grid item lg={2} md={4} sm={4} xs={6}>

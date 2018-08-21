@@ -27,9 +27,6 @@ const styles = theme => ({
     maxHeight: '100%',
     maxWidth: '100%',
   },
-  grid: {
-    height: '100%',
-  },
   media: {
     backgroundSize: 'contain',
     height: 140,
@@ -57,12 +54,9 @@ const styles = theme => ({
     width: 256,
   },
   card: {
-    overflowY: 'auto',
+    margin: theme.spacing.unit,
   },
-  cardContent: {
-    // paddingTop: theme.spacing.unit / 2,
-    // paddingBottom: 0,
-  },
+  cardContent: {},
   iconButton: {
     height: 148,
     width: 148,
@@ -106,7 +100,7 @@ class Main extends React.Component {
             </CardContent>
             <CardContent className={classes.cardContent} align="center">
               <Typography variant="headline" component="h2">
-                How are you satisfied with our services?
+                How satisfied are you with our service?
               </Typography>
               <Grid
                 className={classes.gridStatus}
@@ -181,7 +175,12 @@ class Main extends React.Component {
             </CardContent>
             <CardActions>
               <div className={classes.fill} />
-              <Button onClick={this.handleSend}>Send</Button>
+              {status === undefined &&
+                <Typography color="error" variant="subheading" component="h3">
+                  Please choose an option
+                </Typography>
+              }
+              <Button disabled={status === undefined} onClick={this.handleSend}>Send</Button>
             </CardActions>
           </Card>
         </Grid>

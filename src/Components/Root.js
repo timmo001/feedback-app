@@ -20,7 +20,6 @@ const styles = theme => ({
   center: {
     justifyContent: 'center',
     textAlign: 'center',
-    position: 'fixed',
     top: '50%',
     left: '50%',
     transform: 'translateX(-50%) translateY(-50%)',

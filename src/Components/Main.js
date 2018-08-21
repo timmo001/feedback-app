@@ -111,7 +111,7 @@ class Main extends React.Component {
                 <Grid item lg={2} md={4} sm={4} xs={6}>
                   <IconButton
                     className={classes.iconButton}
-                    style={{ backgroundColor: status === -2 && '#eeeeee' }}
+                    style={{ backgroundColor: status === -2 && '#E0E0E0' }}
                     onClick={() => this.handleStatusChange(-2)}>
                     <div className={classes.icon} style={{ backgroundImage: `url(${MinusTwoIcon})` }} />
                   </IconButton>
@@ -122,7 +122,7 @@ class Main extends React.Component {
                 <Grid item lg={2} md={4} sm={4} xs={6}>
                   <IconButton
                     className={classes.iconButton}
-                    style={{ backgroundColor: status === -1 && '#eeeeee' }}
+                    style={{ backgroundColor: status === -1 && '#E0E0E0' }}
                     onClick={() => this.handleStatusChange(-1)}>
                     <div className={classes.icon} style={{ backgroundImage: `url(${MinusOneIcon})` }} />
                   </IconButton>
@@ -133,7 +133,7 @@ class Main extends React.Component {
                 <Grid item lg={2} md={4} sm={4} xs={6}>
                   <IconButton
                     className={classes.iconButton}
-                    style={{ backgroundColor: status === 0 && '#eeeeee' }}
+                    style={{ backgroundColor: status === 0 && '#E0E0E0' }}
                     onClick={() => this.handleStatusChange(0)}>
                     <div className={classes.icon} style={{ backgroundImage: `url(${NeutralIcon})` }} />
                   </IconButton>
@@ -144,7 +144,7 @@ class Main extends React.Component {
                 <Grid item lg={2} md={4} sm={4} xs={6}>
                   <IconButton
                     className={classes.iconButton}
-                    style={{ backgroundColor: status === 1 && '#eeeeee' }}
+                    style={{ backgroundColor: status === 1 && '#E0E0E0' }}
                     onClick={() => this.handleStatusChange(1)}>
                     <div className={classes.icon} style={{ backgroundImage: `url(${PlusOneIcon})` }} />
                   </IconButton>
@@ -155,7 +155,7 @@ class Main extends React.Component {
                 <Grid item lg={2} md={4} sm={4} xs={6}>
                   <IconButton
                     className={classes.iconButton}
-                    style={{ backgroundColor: status === 2 && '#eeeeee' }}
+                    style={{ backgroundColor: status === 2 && '#E0E0E0' }}
                     onClick={() => this.handleStatusChange(2)}>
                     <div className={classes.icon} style={{ backgroundImage: `url(${PlusTwoIcon})` }} />
                   </IconButton>

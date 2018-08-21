@@ -8,6 +8,7 @@
     "@material-ui/lab": "^1.0.0-alpha.11",
     "@mdi/font": "^2.6.95",
     "classnames": "^2.2.6",
+    "is-plain-obj": "^1.1.0",
     "prop-types": "^15.6.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",

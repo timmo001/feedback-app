@@ -60,18 +60,21 @@ const styles = theme => ({
     // paddingBottom: 0,
   },
   iconButton: {
-    height: 172,
-    width: 172,
-    display: 'flex',
+    height: 148,
+    width: 148,
   },
   buttonText: {
     fontSize: '1.6rem',
-  }
+  },
+  icon: {
+    width: 100,
+    height: 100,
+    backgroundSize: 'cover',
+  },
 });
 
 class Main extends React.Component {
   state = {
-    status: 0,
     comment: '',
   };
 
@@ -106,40 +109,55 @@ class Main extends React.Component {
                 container
                 justify="space-around">
                 <Grid item lg={2} md={4} sm={4} xs={6}>
-                  <IconButton className={classes.iconButton} onClick={() => this.handleStatusChange(-1)}>
-                    <img src={MinusTwoIcon} width={100} alt="Very Dissatisfied" />
+                  <IconButton
+                    className={classes.iconButton}
+                    style={{ backgroundColor: status === -2 && '#eeeeee' }}
+                    onClick={() => this.handleStatusChange(-2)}>
+                    <div className={classes.icon} style={{ backgroundImage: `url(${MinusTwoIcon})` }} />
                   </IconButton>
                   <Typography className={classes.buttonText} variant="subheading" component="h3">
                     Very Dissatisfied
                   </Typography>
                 </Grid>
                 <Grid item lg={2} md={4} sm={4} xs={6}>
-                  <IconButton className={classes.iconButton} onClick={() => this.handleStatusChange(-1)}>
-                    <img src={MinusOneIcon} width={100} alt="Dissatisfied" />
+                  <IconButton
+                    className={classes.iconButton}
+                    style={{ backgroundColor: status === -1 && '#eeeeee' }}
+                    onClick={() => this.handleStatusChange(-1)}>
+                    <div className={classes.icon} style={{ backgroundImage: `url(${MinusOneIcon})` }} />
                   </IconButton>
                   <Typography className={classes.buttonText} variant="subheading" component="h3">
                     Dissatisfied
                   </Typography>
                 </Grid>
                 <Grid item lg={2} md={4} sm={4} xs={6}>
-                  <IconButton className={classes.iconButton} onClick={() => this.handleStatusChange(-1)}>
-                    <img src={NeutralIcon} width={100} alt="Neutral" />
+                  <IconButton
+                    className={classes.iconButton}
+                    style={{ backgroundColor: status === 0 && '#eeeeee' }}
+                    onClick={() => this.handleStatusChange(0)}>
+                    <div className={classes.icon} style={{ backgroundImage: `url(${NeutralIcon})` }} />
                   </IconButton>
                   <Typography className={classes.buttonText} variant="subheading" component="h3">
                     Neutral
                   </Typography>
                 </Grid>
                 <Grid item lg={2} md={4} sm={4} xs={6}>
-                  <IconButton className={classes.iconButton} onClick={() => this.handleStatusChange(-1)}>
-                    <img src={PlusOneIcon} width={100} alt="Satisfied" />
+                  <IconButton
+                    className={classes.iconButton}
+                    style={{ backgroundColor: status === 1 && '#eeeeee' }}
+                    onClick={() => this.handleStatusChange(1)}>
+                    <div className={classes.icon} style={{ backgroundImage: `url(${PlusOneIcon})` }} />
                   </IconButton>
                   <Typography className={classes.buttonText} variant="subheading" component="h3">
                     Satisfied
                   </Typography>
                 </Grid>
                 <Grid item lg={2} md={4} sm={4} xs={6}>
-                  <IconButton className={classes.iconButton} onClick={() => this.handleStatusChange(-1)}>
-                    <img src={PlusTwoIcon} width={100} alt="Very Satisfied" />
+                  <IconButton
+                    className={classes.iconButton}
+                    style={{ backgroundColor: status === 2 && '#eeeeee' }}
+                    onClick={() => this.handleStatusChange(2)}>
+                    <div className={classes.icon} style={{ backgroundImage: `url(${PlusTwoIcon})` }} />
                   </IconButton>
                   <Typography className={classes.buttonText} variant="subheading" component="h3">
                     Very Satisfied

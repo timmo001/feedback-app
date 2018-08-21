@@ -43,6 +43,10 @@ const styles = theme => ({
   margin: {
     margin: `${theme.spacing.unit / 2}px ${theme.spacing.unit}px`,
   },
+  gridStatus: {
+    marginTop: theme.spacing.unit * 2,
+    marginBottom: theme.spacing.unit * 2,
+  },
   withoutLabel: {
     marginTop: theme.spacing.unit * 2,
   },
@@ -64,7 +68,7 @@ const styles = theme => ({
     width: 148,
   },
   buttonText: {
-    fontSize: '1.6rem',
+    fontSize: '1.2rem',
   },
   icon: {
     width: 100,
@@ -105,7 +109,7 @@ class Main extends React.Component {
                 How are you satisfied with our services?
               </Typography>
               <Grid
-                className={classes.grid}
+                className={classes.gridStatus}
                 container
                 justify="space-around">
                 <Grid item lg={2} md={4} sm={4} xs={6}>

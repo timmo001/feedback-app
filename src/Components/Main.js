@@ -1,7 +1,9 @@
 import React from 'react';
+import request from 'superagent';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import green from '@material-ui/core/colors/green';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -13,6 +15,7 @@ import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import IconButton from '@material-ui/core/IconButton';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Logo from '../resources/logo.svg';
 import PlusOneIcon from '../resources/plusOne.svg';
 import PlusTwoIcon from '../resources/plusTwo.svg';
@@ -69,20 +72,85 @@ const styles = theme => ({
     height: 100,
     backgroundSize: 'cover',
   },
+  wrapper: {
+    margin: theme.spacing.unit,
+    position: 'relative',
+  },
+  buttonSuccess: {
+    backgroundColor: green[500],
+    '&:hover': {
+      backgroundColor: green[700],
+    },
+  },
+  buttonProgress: {
+    color: green[500],
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    marginTop: -12,
+    marginLeft: -12,
+  },
 });
 
 class Main extends React.Component {
   state = {
     comment: '',
+    loading: false,
+    success: false,
   };
 
   handleStatusChange = status => this.setState({ status });
 
   handleChange = prop => event => this.setState({ [prop]: event.target.value });
 
+  handleSend = () => {
+    this.setState({ success: false, loading: true, }, () => {
+      request
+        .post(`${process.env.REACT_APP_API_URL}/response`)
+        .send({
+          id: this.props.id,
+          status: this.state.status,
+          comment: this.state.comment
+        })
+        .timeout({
+          response: 10000,
+          deadline: 60000,
+        })
+        .then(res => {
+          if (res.status === 200) {
+            this.setState({ loading: false, success: true }, () => {
+              console.log('Done.');
+            });
+          } else {
+            this.setState({ loading: false, success: false }, () => {
+              console.error(`Error ${res.status}: ${res.body}`);
+              this.setState({ error: `Error ${res.status}: ${res.body}\nCheck your credentials and try again` }, () =>
+                setTimeout(() => this.setState({ error: undefined }), 20000));
+            });
+          }
+        })
+        .catch(err => {
+          this.setState({ loading: false, success: false }, () => {
+            if (err.response) {
+              console.error(`Error: ${err.status} - ${err.response.text}`);
+              this.setState({ error: `Error: ${err.status} - ${err.response.text}` }, () =>
+                setTimeout(() => this.setState({ error: undefined }), 8000));
+            } else {
+              console.error(`Error: ${err.message} - Check your credentials and try again`);
+              this.setState({ error: `Error: ${err.message} - Check your credentials and try again` }, () =>
+                setTimeout(() => this.setState({ error: undefined }), 8000));
+            }
+          });
+        });
+    });
+  };
+
   render() {
     const { classes } = this.props;
-    const { status, comment } = this.state;
+    const { status, comment, loading, success } = this.state;
+    const buttonClassname = classNames({
+      [classes.buttonSuccess]: success,
+    });
 
     return (
       <Grid
@@ -180,7 +248,15 @@ class Main extends React.Component {
                   Please choose an option
                 </Typography>
               }
-              <Button disabled={status === undefined} onClick={this.handleSend}>Send</Button>
+              <div className={classes.wrapper}>
+                <Button
+                  className={buttonClassname}
+                  disabled={status === undefined || loading}
+                  onClick={this.handleSend}>
+                  Send
+                </Button>
+                {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+              </div>
             </CardActions>
           </Card>
         </Grid>

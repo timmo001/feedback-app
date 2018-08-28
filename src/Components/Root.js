@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Snackbar from '@material-ui/core/Snackbar';
-// import { CircularProgress, Typography } from '@material-ui/core';
 import Main from './Main';
 
 const styles = theme => ({
@@ -35,8 +34,8 @@ class Root extends Component {
   };
 
   render() {
-    const { classes, theme } = this.props;
-    const { config, snackMessage } = this.state;
+    const { classes } = this.props;
+    const { snackMessage } = this.state;
 
     return (
       <div className={classes.root}>

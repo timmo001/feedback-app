@@ -7,10 +7,8 @@ import Main from './Main';
 const styles = theme => ({
   root: {
     position: 'absolute',
-    height: '100%',
-    width: '100%',
-    maxHeight: '100%',
-    maxWidth: '100%',
+    minHeight: '100%',
+    minWidth: '100%',
     backgroundColor: theme.palette.mainBackground,
   },
   flex: {

@@ -106,7 +106,7 @@ class Main extends React.Component {
   handleSend = () => {
     this.setState({ success: false, loading: true, }, () => {
       request
-        .post(`${process.env.REACT_APP_API_URL}/response`)
+        .post(`${this.props.url}/response`)
         .send({
           id: this.props.id,
           status: this.state.status,
@@ -151,6 +151,8 @@ class Main extends React.Component {
     const buttonClassname = classNames({
       [classes.buttonSuccess]: success,
     });
+
+    console.log('props:', this.props);
 
     return (
       <Grid

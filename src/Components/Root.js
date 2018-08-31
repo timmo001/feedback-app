@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import {
+  BrowserRouter as Router,
+  Route
+} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Snackbar from '@material-ui/core/Snackbar';
@@ -36,23 +40,24 @@ class Root extends Component {
     const { snackMessage } = this.state;
 
     return (
-      <div className={classes.root}>
-        <Main />
-
-        <Snackbar
-          open={snackMessage.open}
-          autoHideDuration={2000}
-          onClose={this.handleClose}
-          onExited={this.handleExited}
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'left',
-          }}
-          ContentProps={{
-            'aria-describedby': 'message-id',
-          }}
-          message={<span id="message-id">{snackMessage.text}</span>} />
-      </div>
+      <Router>
+        <div className={classes.root}>
+          <Route path="/customer-care/feedback/:response-url" component={Main} />
+          <Snackbar
+            open={snackMessage.open}
+            autoHideDuration={2000}
+            onClose={this.handleClose}
+            onExited={this.handleExited}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'left',
+            }}
+            ContentProps={{
+              'aria-describedby': 'message-id',
+            }}
+            message={<span id="message-id">{snackMessage.text}</span>} />
+        </div>
+      </Router>
     );
   }
 }

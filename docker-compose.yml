@@ -11,8 +11,8 @@ services:
       - 80:80
     volumes:
       - ~/ssl:/ssl
-  feedback-app-api:
-    image: timmo001/feedback-app-api
+  feedback-api:
+    image: timmo001/feedback-api
     environment:
       CERTIFICATES_DIR: /ssl
     ports:

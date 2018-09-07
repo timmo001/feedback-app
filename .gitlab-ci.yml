@@ -87,6 +87,11 @@ build_app:
   image: docker:stable
   before_script:
     - docker info
+    - |
+      echo "${CI_JOB_TOKEN}" | docker login \
+        --username gitlab-ci-token \
+        --password-stdin \
+        registry.gitlab.com
     - docker run -d --name db arminc/clair-db:latest
     - docker run -p 6060:6060 --link db:postgres -d --name clair arminc/clair-local-scan:v2.0.1
     - apk add -U curl ca-certificates
@@ -129,12 +134,12 @@ build_app:
   image: docker:stable
   before_script:
     - docker info
-    - docker pull "registry.gitlab.com/${CI_PROJECT_PATH}/${IMAGE_ARCH}:${CI_COMMIT_SHA}"
     - |
       echo "${CI_JOB_TOKEN}" | docker login \
         --username gitlab-ci-token \
         --password-stdin \
         registry.gitlab.com
+    - docker pull "registry.gitlab.com/${CI_PROJECT_PATH}/${IMAGE_ARCH}:${CI_COMMIT_SHA}"
     - |
       echo "${DOCKER_PASSWORD}" | docker login \
         --username "${DOCKER_LOGIN}" \

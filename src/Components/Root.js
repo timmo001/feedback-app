@@ -42,7 +42,7 @@ class Root extends Component {
     return (
       <Router>
         <div className={classes.root}>
-          <Route path="/customer-care/feedback/:response-url" component={Main} />
+          <Route path="/customer-care/feedback" component={Main} />
           <Snackbar
             open={snackMessage.open}
             autoHideDuration={2000}

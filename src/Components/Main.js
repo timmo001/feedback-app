@@ -2,6 +2,7 @@ import React from 'react';
 import request from 'superagent';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import queryString from 'query-string';
 import { withStyles } from '@material-ui/core/styles';
 import green from '@material-ui/core/colors/green';
 import Grid from '@material-ui/core/Grid';
@@ -104,9 +105,10 @@ class Main extends React.Component {
   handleChange = prop => event => this.setState({ [prop]: event.target.value });
 
   handleSend = () => {
+    const values = queryString.parse(this.props.location.search);
     this.setState({ success: false, loading: true, }, () => {
       request
-        .post(`${this.props.url}/response`)
+        .post(`${values.responseUrl}/response`)
         .send({
           id: this.props.id,
           status: this.state.status,
@@ -119,13 +121,11 @@ class Main extends React.Component {
         .then(res => {
           if (res.status === 200) {
             this.setState({ loading: false, success: true }, () => {
-              console.log('Done.');
+              console.log('Response sent.');
             });
           } else {
             this.setState({ loading: false, success: false }, () => {
               console.error(`Error ${res.status}: ${res.body}`);
-              this.setState({ error: `Error ${res.status}: ${res.body}\nCheck your credentials and try again` }, () =>
-                setTimeout(() => this.setState({ error: undefined }), 20000));
             });
           }
         })
@@ -133,12 +133,8 @@ class Main extends React.Component {
           this.setState({ loading: false, success: false }, () => {
             if (err.response) {
               console.error(`Error: ${err.status} - ${err.response.text}`);
-              this.setState({ error: `Error: ${err.status} - ${err.response.text}` }, () =>
-                setTimeout(() => this.setState({ error: undefined }), 8000));
             } else {
               console.error(`Error: ${err.message} - Check your credentials and try again`);
-              this.setState({ error: `Error: ${err.message} - Check your credentials and try again` }, () =>
-                setTimeout(() => this.setState({ error: undefined }), 8000));
             }
           });
         });
@@ -151,8 +147,6 @@ class Main extends React.Component {
     const buttonClassname = classNames({
       [classes.buttonSuccess]: success,
     });
-
-    console.log('props:', this.props);
 
     return (
       <Grid

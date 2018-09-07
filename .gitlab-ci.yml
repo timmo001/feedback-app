@@ -366,6 +366,29 @@ dep_scan:
     - tags
 
 # Deploy jobs
+release_file:
+  stage: deploy
+  image: node:alpine
+  script:
+    - apk --no-cache add curl zip jq
+    - yarn install && yarn cache clean
+    - yarn build --production
+    - zip -r home-panel-built.zip build
+    - |
+      curl \
+        -H "Authorization: token ${GITHUB_TOKEN}" -H \
+        -H "Accept: application/vnd.github.manifold-preview" \
+        -H "Content-Type: application/zip" \
+        --data-binary @home-panel-built.zip "https://uploads.github.com/repos/timmo001/home-panel/releases/$(curl https://api.github.com/repos/timmo001/home-panel/releases/latest | jq '.id')/assets?name=home-panel-built.zip"
+  tags:
+    - deploy
+  only:
+    - tags
+    - triggers
+    - schedules
+  except:
+    - /^(?!master).+@/
+
 deploy:armhf:
   <<: *deploy
   variables:

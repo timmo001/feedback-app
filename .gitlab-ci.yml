@@ -237,31 +237,6 @@ hadolint:
   script:
     - hadolint "Dockerfile"
 
-# shellcheck:
-#   <<: *preflight
-#   image:
-#     name: koalaman/shellcheck-alpine:stable
-#     entrypoint: [""]
-#   before_script:
-#     - shellcheck --version
-#     - apk --no-cache add grep
-#     - |
-#       find . -type f -print0 | \
-#         xargs -0 sed -i 's:#!/usr/bin/with-contenv bash:#!/bin/bash:g'
-#   script:
-#     - |
-#       for file in $(grep -IRl "#\!\(/usr/bin/env \|/bin/\)" --exclude-dir \
-#         ".git" --exclude ".gitlab-ci.yml"); do
-#         if ! shellcheck $file; then
-#           export FAILED=1
-#         else
-#           echo "$file OK"
-#         fi
-#       done
-#       if [ "${FAILED}" = "1" ]; then
-#         exit 1
-#       fi
-
 yamllint:
   <<: *preflight
   image: sdesbure/yamllint
@@ -358,38 +333,6 @@ clair:amd64:
     IMAGE_ARCH: amd64
 
 # Test jobs
-# test:
-#   stage: test
-#   image: node:alpine
-#   script:
-#     - yarn install && yarn cache clean
-#     - yarn run test
-#   only:
-#     - branches
-#   except:
-#     variables:
-#       - $TEST_DISABLED
-
-# code_quality:
-#   stage: test
-#   image: docker:stable
-#   variables:
-#     DOCKER_DRIVER: overlay2
-#   allow_failure: true
-#   services:
-#     - docker:stable-dind
-#   script:
-#     - |
-#       docker run --env SOURCE_CODE="$PWD" \
-#                 --volume "$PWD":/code \
-#                 --volume /var/run/docker.sock:/var/run/docker.sock \
-#                 "registry.gitlab.com/gitlab-org/security-products/codequality:$(echo "$CI_SERVER_VERSION" | \
-#                   sed 's/^\([0-9]*\)\.\([0-9]*\).*/\1-\2-stable/')" /code
-#   artifacts:
-#     paths: [gl-code-quality-report.json]
-#   except:
-#     - tags
-
 dep_scan:
   stage: test
   image: docker:stable

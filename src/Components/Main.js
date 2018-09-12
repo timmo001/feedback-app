@@ -8,16 +8,15 @@ import green from '@material-ui/core/colors/green';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import CardActions from '@material-ui/core/CardActions';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
-import IconButton from '@material-ui/core/IconButton';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Logo from '../resources/logo.svg';
+import Header from './Header';
+import StatusButton from './Button';
 import PlusOneIcon from '../resources/plusOne.svg';
 import PlusTwoIcon from '../resources/plusTwo.svg';
 import NeutralIcon from '../resources/zero.svg';
@@ -31,13 +30,6 @@ const styles = theme => ({
     maxHeight: '100%',
     maxWidth: '100%',
   },
-  media: {
-    backgroundSize: 'contain',
-    height: 140,
-    [theme.breakpoints.up('md')]: {
-      height: 240,
-    },
-  },
   fill: {
     flexGrow: 1,
   },
@@ -48,30 +40,11 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * 2,
     marginBottom: theme.spacing.unit * 2,
   },
-  withoutLabel: {
-    marginTop: theme.spacing.unit * 2,
-  },
   textField: {
     flexBasis: '50%',
   },
-  fakeButton: {
-    width: 256,
-  },
   card: {
     margin: theme.spacing.unit,
-  },
-  cardContent: {},
-  iconButton: {
-    height: 148,
-    width: 148,
-  },
-  buttonText: {
-    fontSize: '1.2rem',
-  },
-  icon: {
-    width: 100,
-    height: 100,
-    backgroundSize: 'cover',
   },
   wrapper: {
     margin: theme.spacing.unit,
@@ -157,12 +130,7 @@ class Main extends React.Component {
         justify="center">
         <Grid item lg={6} md={10} sm={10} xs={12}>
           <Card className={classes.card}>
-            <CardContent className={classes.cardContent}>
-              <CardMedia
-                className={classes.media}
-                image={Logo}
-                title="Feedback" />
-            </CardContent>
+            <Header />
             {!success ?
               <div>
                 <CardContent className={classes.cardContent} align="center">
@@ -173,61 +141,11 @@ class Main extends React.Component {
                     className={classes.gridStatus}
                     container
                     justify="space-around">
-                    <Grid item lg={2} md={4} sm={4} xs={6}>
-                      <IconButton
-                        className={classes.iconButton}
-                        style={{ backgroundColor: status === -2 && '#E0E0E0' }}
-                        onClick={() => this.handleStatusChange(-2)}>
-                        <div className={classes.icon} style={{ backgroundImage: `url(${MinusTwoIcon})` }} />
-                      </IconButton>
-                      <Typography className={classes.buttonText} variant="subheading" component="h3">
-                        Very Dissatisfied
-                      </Typography>
-                    </Grid>
-                    <Grid item lg={2} md={4} sm={4} xs={6}>
-                      <IconButton
-                        className={classes.iconButton}
-                        style={{ backgroundColor: status === -1 && '#E0E0E0' }}
-                        onClick={() => this.handleStatusChange(-1)}>
-                        <div className={classes.icon} style={{ backgroundImage: `url(${MinusOneIcon})` }} />
-                      </IconButton>
-                      <Typography className={classes.buttonText} variant="subheading" component="h3">
-                        Dissatisfied
-                      </Typography>
-                    </Grid>
-                    <Grid item lg={2} md={4} sm={4} xs={6}>
-                      <IconButton
-                        className={classes.iconButton}
-                        style={{ backgroundColor: status === 0 && '#E0E0E0' }}
-                        onClick={() => this.handleStatusChange(0)}>
-                        <div className={classes.icon} style={{ backgroundImage: `url(${NeutralIcon})` }} />
-                      </IconButton>
-                      <Typography className={classes.buttonText} variant="subheading" component="h3">
-                        Neutral
-                      </Typography>
-                    </Grid>
-                    <Grid item lg={2} md={4} sm={4} xs={6}>
-                      <IconButton
-                        className={classes.iconButton}
-                        style={{ backgroundColor: status === 1 && '#E0E0E0' }}
-                        onClick={() => this.handleStatusChange(1)}>
-                        <div className={classes.icon} style={{ backgroundImage: `url(${PlusOneIcon})` }} />
-                      </IconButton>
-                      <Typography className={classes.buttonText} variant="subheading" component="h3">
-                        Satisfied
-                      </Typography>
-                    </Grid>
-                    <Grid item lg={2} md={4} sm={4} xs={6}>
-                      <IconButton
-                        className={classes.iconButton}
-                        style={{ backgroundColor: status === 2 && '#E0E0E0' }}
-                        onClick={() => this.handleStatusChange(2)}>
-                        <div className={classes.icon} style={{ backgroundImage: `url(${PlusTwoIcon})` }} />
-                      </IconButton>
-                      <Typography className={classes.buttonText} variant="subheading" component="h3">
-                        Very Satisfied
-                      </Typography>
-                    </Grid>
+                    <StatusButton status={{ id: -2, desc: 'Very Dissatisfied', icon: MinusTwoIcon }} currentStatusID={status} handleStatusChange={this.handleStatusChange} />
+                    <StatusButton status={{ id: -1, desc: 'Dissatisfied', icon: MinusOneIcon }} currentStatusID={status} handleStatusChange={this.handleStatusChange} />
+                    <StatusButton status={{ id: 0, desc: 'Neutral', icon: NeutralIcon }} currentStatusID={status} handleStatusChange={this.handleStatusChange} />
+                    <StatusButton status={{ id: 1, desc: 'Satisfied', icon: PlusOneIcon }} currentStatusID={status} handleStatusChange={this.handleStatusChange} />
+                    <StatusButton status={{ id: 2, desc: 'Very Satisfied', icon: PlusTwoIcon }} currentStatusID={status} handleStatusChange={this.handleStatusChange} />
                   </Grid>
                   <FormControl className={classNames(classes.margin, classes.textField)} fullWidth>
                     <InputLabel htmlFor="comment">Any other comments?</InputLabel>

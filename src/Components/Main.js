@@ -110,7 +110,7 @@ class Main extends React.Component {
       request
         .post(`${values.responseUrl ? values.responseUrl : `${window.location.protocol}//${window.location.hostname}:31020`}/response`)
         .send({
-          id: this.props.id,
+          id: values.id ? values.id : -1,
           status: this.state.status,
           comment: this.state.comment
         })
@@ -122,6 +122,7 @@ class Main extends React.Component {
           if (res.status === 200) {
             this.setState({ loading: false, success: true }, () => {
               console.log('Response sent.');
+
             });
           } else {
             this.setState({ loading: false, success: false }, () => {
@@ -162,98 +163,111 @@ class Main extends React.Component {
                 image={Logo}
                 title="Feedback" />
             </CardContent>
-            <CardContent className={classes.cardContent} align="center">
-              <Typography variant="headline" component="h2">
-                How satisfied are you with our service?
-              </Typography>
-              <Grid
-                className={classes.gridStatus}
-                container
-                justify="space-around">
-                <Grid item lg={2} md={4} sm={4} xs={6}>
-                  <IconButton
-                    className={classes.iconButton}
-                    style={{ backgroundColor: status === -2 && '#E0E0E0' }}
-                    onClick={() => this.handleStatusChange(-2)}>
-                    <div className={classes.icon} style={{ backgroundImage: `url(${MinusTwoIcon})` }} />
-                  </IconButton>
-                  <Typography className={classes.buttonText} variant="subheading" component="h3">
-                    Very Dissatisfied
+            {!success ?
+              <div>
+                <CardContent className={classes.cardContent} align="center">
+                  <Typography variant="headline" component="h2">
+                    How satisfied are you with our service?
                   </Typography>
-                </Grid>
-                <Grid item lg={2} md={4} sm={4} xs={6}>
-                  <IconButton
-                    className={classes.iconButton}
-                    style={{ backgroundColor: status === -1 && '#E0E0E0' }}
-                    onClick={() => this.handleStatusChange(-1)}>
-                    <div className={classes.icon} style={{ backgroundImage: `url(${MinusOneIcon})` }} />
-                  </IconButton>
-                  <Typography className={classes.buttonText} variant="subheading" component="h3">
-                    Dissatisfied
-                  </Typography>
-                </Grid>
-                <Grid item lg={2} md={4} sm={4} xs={6}>
-                  <IconButton
-                    className={classes.iconButton}
-                    style={{ backgroundColor: status === 0 && '#E0E0E0' }}
-                    onClick={() => this.handleStatusChange(0)}>
-                    <div className={classes.icon} style={{ backgroundImage: `url(${NeutralIcon})` }} />
-                  </IconButton>
-                  <Typography className={classes.buttonText} variant="subheading" component="h3">
-                    Neutral
-                  </Typography>
-                </Grid>
-                <Grid item lg={2} md={4} sm={4} xs={6}>
-                  <IconButton
-                    className={classes.iconButton}
-                    style={{ backgroundColor: status === 1 && '#E0E0E0' }}
-                    onClick={() => this.handleStatusChange(1)}>
-                    <div className={classes.icon} style={{ backgroundImage: `url(${PlusOneIcon})` }} />
-                  </IconButton>
-                  <Typography className={classes.buttonText} variant="subheading" component="h3">
-                    Satisfied
-                  </Typography>
-                </Grid>
-                <Grid item lg={2} md={4} sm={4} xs={6}>
-                  <IconButton
-                    className={classes.iconButton}
-                    style={{ backgroundColor: status === 2 && '#E0E0E0' }}
-                    onClick={() => this.handleStatusChange(2)}>
-                    <div className={classes.icon} style={{ backgroundImage: `url(${PlusTwoIcon})` }} />
-                  </IconButton>
-                  <Typography className={classes.buttonText} variant="subheading" component="h3">
-                    Very Satisfied
-                  </Typography>
-                </Grid>
-              </Grid>
-              <FormControl className={classNames(classes.margin, classes.textField)} fullWidth>
-                <InputLabel htmlFor="comment">Any other comments?</InputLabel>
-                <Input
-                  id="comment"
-                  type="text"
-                  multiline
-                  value={comment}
-                  onChange={this.handleChange('comment')}
-                  onKeyPress={this.handleKeyPress} />
-              </FormControl>
-            </CardContent>
-            <CardActions>
-              <div className={classes.fill} />
-              {status === undefined &&
-                <Typography color="error" variant="subheading" component="h3">
-                  Please choose an option
-                </Typography>
-              }
-              <div className={classes.wrapper}>
-                <Button
-                  className={buttonClassname}
-                  disabled={status === undefined || loading}
-                  onClick={this.handleSend}>
-                  Send
-                </Button>
-                {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+                  <Grid
+                    className={classes.gridStatus}
+                    container
+                    justify="space-around">
+                    <Grid item lg={2} md={4} sm={4} xs={6}>
+                      <IconButton
+                        className={classes.iconButton}
+                        style={{ backgroundColor: status === -2 && '#E0E0E0' }}
+                        onClick={() => this.handleStatusChange(-2)}>
+                        <div className={classes.icon} style={{ backgroundImage: `url(${MinusTwoIcon})` }} />
+                      </IconButton>
+                      <Typography className={classes.buttonText} variant="subheading" component="h3">
+                        Very Dissatisfied
+                      </Typography>
+                    </Grid>
+                    <Grid item lg={2} md={4} sm={4} xs={6}>
+                      <IconButton
+                        className={classes.iconButton}
+                        style={{ backgroundColor: status === -1 && '#E0E0E0' }}
+                        onClick={() => this.handleStatusChange(-1)}>
+                        <div className={classes.icon} style={{ backgroundImage: `url(${MinusOneIcon})` }} />
+                      </IconButton>
+                      <Typography className={classes.buttonText} variant="subheading" component="h3">
+                        Dissatisfied
+                      </Typography>
+                    </Grid>
+                    <Grid item lg={2} md={4} sm={4} xs={6}>
+                      <IconButton
+                        className={classes.iconButton}
+                        style={{ backgroundColor: status === 0 && '#E0E0E0' }}
+                        onClick={() => this.handleStatusChange(0)}>
+                        <div className={classes.icon} style={{ backgroundImage: `url(${NeutralIcon})` }} />
+                      </IconButton>
+                      <Typography className={classes.buttonText} variant="subheading" component="h3">
+                        Neutral
+                      </Typography>
+                    </Grid>
+                    <Grid item lg={2} md={4} sm={4} xs={6}>
+                      <IconButton
+                        className={classes.iconButton}
+                        style={{ backgroundColor: status === 1 && '#E0E0E0' }}
+                        onClick={() => this.handleStatusChange(1)}>
+                        <div className={classes.icon} style={{ backgroundImage: `url(${PlusOneIcon})` }} />
+                      </IconButton>
+                      <Typography className={classes.buttonText} variant="subheading" component="h3">
+                        Satisfied
+                      </Typography>
+                    </Grid>
+                    <Grid item lg={2} md={4} sm={4} xs={6}>
+                      <IconButton
+                        className={classes.iconButton}
+                        style={{ backgroundColor: status === 2 && '#E0E0E0' }}
+                        onClick={() => this.handleStatusChange(2)}>
+                        <div className={classes.icon} style={{ backgroundImage: `url(${PlusTwoIcon})` }} />
+                      </IconButton>
+                      <Typography className={classes.buttonText} variant="subheading" component="h3">
+                        Very Satisfied
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                  <FormControl className={classNames(classes.margin, classes.textField)} fullWidth>
+                    <InputLabel htmlFor="comment">Any other comments?</InputLabel>
+                    <Input
+                      id="comment"
+                      type="text"
+                      multiline
+                      value={comment}
+                      onChange={this.handleChange('comment')}
+                      onKeyPress={this.handleKeyPress} />
+                  </FormControl>
+                </CardContent>
+                <CardActions>
+                  <div className={classes.fill} />
+                  {status === undefined &&
+                    <Typography color="error" variant="subheading" component="h3">
+                      Please choose an option
+                    </Typography>
+                  }
+                  <div className={classes.wrapper}>
+                    <Button
+                      className={buttonClassname}
+                      disabled={status === undefined || loading}
+                      onClick={this.handleSend}>
+                      Send
+                    </Button>
+                    {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+                  </div>
+                </CardActions>
               </div>
-            </CardActions>
+              :
+              <CardContent className={classes.cardContent} align="center">
+                <Typography variant="headline" component="h2">
+                  Thank you for your feedback!
+                </Typography>
+                <Typography variant="subheading" component="h4">
+                  You can now close this tab/window.
+                </Typography>
+              </CardContent>
+            }
           </Card>
         </Grid>
       </Grid>

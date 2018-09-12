@@ -108,7 +108,7 @@ class Main extends React.Component {
     const values = queryString.parse(this.props.location.search);
     this.setState({ success: false, loading: true, }, () => {
       request
-        .post(`${values.responseUrl}/response`)
+        .post(`${values.responseUrl ? values.responseUrl : `${window.location.protocol}//${window.location.hostname}:31020`}/response`)
         .send({
           id: this.props.id,
           status: this.state.status,

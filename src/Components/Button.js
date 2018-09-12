@@ -44,7 +44,7 @@ class Main extends React.Component {
 Main.propTypes = {
   classes: PropTypes.object.isRequired,
   status: PropTypes.object.isRequired,
-  currentStatusID: PropTypes.number.isRequired,
+  currentStatusID: PropTypes.number,
   handleStatusChange: PropTypes.func.isRequired,
 };
 

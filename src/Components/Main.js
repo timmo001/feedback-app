@@ -69,21 +69,29 @@ const styles = theme => ({
 class Main extends React.Component {
   state = {
     comment: '',
+    responseUrl: `${window.location.protocol}//${window.location.hostname}:31020`,
     loading: false,
     success: false,
   };
+
+  componentWillReceiveProps = (nextProps) => {
+    const values = queryString.parse(this.props.location.search);
+    if (this.state.responseUrl !== values.responseUrl) this.setState({
+      responseUrl: `${values.responseUrl ? values.responseUrl : `${window.location.protocol}//${window.location.hostname}:31020`}`
+    });
+    if (this.state.id !== values.id) this.setState({ id: values.id });
+  }
 
   handleStatusChange = status => this.setState({ status });
 
   handleChange = prop => event => this.setState({ [prop]: event.target.value });
 
   handleSend = () => {
-    const values = queryString.parse(this.props.location.search);
     this.setState({ success: false, loading: true, }, () => {
       request
-        .post(`${values.responseUrl ? values.responseUrl : `${window.location.protocol}//${window.location.hostname}:31020`}/response`)
+        .post(`${this.state.responseUrl}/response`)
         .send({
-          id: values.id ? values.id : -1,
+          id: this.state.id ? this.state.id : -1,
           status: this.state.status,
           comment: this.state.comment
         })
@@ -117,7 +125,7 @@ class Main extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { status, comment, loading, success } = this.state;
+    const { status, comment, loading, success, responseUrl } = this.state;
     const buttonClassname = classNames({
       [classes.buttonSuccess]: success,
     });
@@ -130,7 +138,7 @@ class Main extends React.Component {
         justify="center">
         <Grid item lg={6} md={10} sm={10} xs={12}>
           <Card className={classes.card}>
-            <Header />
+            <Header responseUrl={responseUrl} />
             {!success ?
               <div>
                 <CardContent className={classes.cardContent} align="center">

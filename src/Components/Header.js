@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Logo from '../resources/logo.svg';
+import imageExists from '../Common/imageExists';
 
 const styles = theme => ({
   media: {
@@ -20,11 +21,21 @@ class Header extends React.Component {
   render() {
     const { classes } = this.props;
 
+    var logo = Logo;
+    console.log('logo', logo);
+
+    logo = `${this.props.responseUrl}/logo.svg`
+    const logoUrl = `${this.props.responseUrl}/logo.svg`
+    imageExists(logoUrl, (exists) => {
+      if (exists) logo = logoUrl;
+      console.log('logo', logo);
+    });
+
     return (
       <CardContent>
         <CardMedia
           className={classes.media}
-          image={Logo}
+          image={logo}
           title="Feedback" />
       </CardContent>
     );

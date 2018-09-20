@@ -142,21 +142,17 @@ class Main extends React.Component {
     success: false,
     rows: [],
     page: 0,
-    rowsPerPage: 8,
+    rowsPerPage: 10,
   };
 
-  componentWillReceiveProps = () => {
+  componentDidMount = () => {
     const values = queryString.parse(this.props.location.search);
     if (this.state.responseUrl !== values.responseUrl)
       this.setState({
         responseUrl: `${values.responseUrl ? values.responseUrl : `${window.location.protocol}//${window.location.hostname}:31020`}`
       });
-    if (this.state.id !== values.id)
-      this.setState({ id: values.id });
-  };
-
-  componentDidMount = () => {
-    const token = prompt('Enter token:');
+    const storedToken = sessionStorage.getItem('token');
+    const token = storedToken ? storedToken : prompt('Enter token:');
     if (token)
       request
         .post(`${this.state.responseUrl}/response/get-all`)
@@ -169,17 +165,20 @@ class Main extends React.Component {
           if (res.status === 200) {
             this.setState({ loading: false, success: true }, () => {
               console.log('Responses received.');
+              sessionStorage.setItem('token', token);
               let rows = [];
               res.body.map((i) => rows.push(createData(i.id, i.status, i.comment)));
               this.setState({ rows });
             });
           } else {
+            sessionStorage.removeItem('token');
             this.setState({ loading: false, success: false }, () => {
               console.error(`Error ${res.status}: ${res.body}`);
             });
           }
         })
         .catch(err => {
+          sessionStorage.removeItem('token');
           this.setState({ loading: false, success: false }, () => {
             if (err.response) {
               console.error(`Error: ${err.status} - ${err.response.text}`);
@@ -197,7 +196,6 @@ class Main extends React.Component {
   render() {
     const { classes } = this.props;
     const { responseUrl, rows, rowsPerPage, page } = this.state;
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
     return (
       <Grid
@@ -241,11 +239,6 @@ class Main extends React.Component {
                             </TableRow>
                           );
                         })}
-                        {emptyRows > 0 && (
-                          <TableRow style={{ height: 48 * emptyRows }}>
-                            <TableCell colSpan={6} />
-                          </TableRow>
-                        )}
                       </TableBody>
                       <TableFooter>
                         <TableRow>

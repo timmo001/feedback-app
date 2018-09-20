@@ -8,6 +8,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Table from '@material-ui/core/Table';
+import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableFooter from '@material-ui/core/TableFooter';
@@ -141,7 +142,7 @@ class Main extends React.Component {
     success: false,
     rows: [],
     page: 0,
-    rowsPerPage: 10,
+    rowsPerPage: 8,
   };
 
   componentWillReceiveProps = () => {
@@ -193,7 +194,6 @@ class Main extends React.Component {
 
   handleChangeRowsPerPage = event => this.setState({ rowsPerPage: event.target.value });
 
-
   render() {
     const { classes } = this.props;
     const { responseUrl, rows, rowsPerPage, page } = this.state;
@@ -216,6 +216,13 @@ class Main extends React.Component {
                   </Typography>
                   <div className={classes.tableWrapper}>
                     <Table className={classes.table}>
+                      <TableHead>
+                        <TableRow>
+                          <TableCell>ID</TableCell>
+                          <TableCell>Status</TableCell>
+                          <TableCell>Comment</TableCell>
+                        </TableRow>
+                      </TableHead>
                       <TableBody>
                         {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, x) => {
                           return (
@@ -223,7 +230,13 @@ class Main extends React.Component {
                               <TableCell component="th" scope="row">
                                 {row.id}
                               </TableCell>
-                              <TableCell numeric>{row.status}</TableCell>
+                              <TableCell>
+                                {row.status === -2 ? 'Very Dissatisfied'
+                                  : row.status === -1 ? 'Dissatisfied'
+                                    : row.status === 0 ? 'Neutral'
+                                      : row.status === 1 ? 'Satisfied'
+                                        : row.status === 2 && 'Very Satisfied'} ({row.status})
+                              </TableCell>
                               <TableCell>{row.comment}</TableCell>
                             </TableRow>
                           );

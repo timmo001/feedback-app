@@ -75,7 +75,7 @@ class Main extends React.Component {
   };
 
   componentWillReceiveProps = (nextProps) => {
-    const values = queryString.parse(this.props.location.search);
+    const values = queryString.parse(nextProps.search);
     if (this.state.responseUrl !== values.responseUrl) this.setState({
       responseUrl: `${values.responseUrl ? values.responseUrl : `${window.location.protocol}//${window.location.hostname}:31020`}`
     });

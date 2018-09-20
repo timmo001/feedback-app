@@ -1,27 +1,18 @@
 import React from 'react';
 import request from 'superagent';
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
 import { withStyles } from '@material-ui/core/styles';
-import green from '@material-ui/core/colors/green';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableFooter from '@material-ui/core/TableFooter';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import FirstPageIcon from '@material-ui/icons/FirstPage';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
@@ -55,10 +46,6 @@ const styles = theme => ({
   wrapper: {
     margin: theme.spacing.unit,
     position: 'relative',
-  },
-  root: {
-    width: '100%',
-    marginTop: theme.spacing.unit * 3,
   },
   table: {
     minWidth: 500,
@@ -157,12 +144,14 @@ class Main extends React.Component {
     rowsPerPage: 10,
   };
 
-  componentWillReceiveProps = (nextProps) => {
+  componentWillReceiveProps = () => {
     const values = queryString.parse(this.props.location.search);
-    if (this.state.responseUrl !== values.responseUrl) this.setState({
-      responseUrl: `${values.responseUrl ? values.responseUrl : `${window.location.protocol}//${window.location.hostname}:31020`}`
-    });
-    if (this.state.id !== values.id) this.setState({ id: values.id });
+    if (this.state.responseUrl !== values.responseUrl)
+      this.setState({
+        responseUrl: `${values.responseUrl ? values.responseUrl : `${window.location.protocol}//${window.location.hostname}:31020`}`
+      });
+    if (this.state.id !== values.id)
+      this.setState({ id: values.id });
   };
 
   componentDidMount = () => {

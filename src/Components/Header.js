@@ -22,13 +22,10 @@ class Header extends React.Component {
     const { classes } = this.props;
 
     var logo = Logo;
-    console.log('logo', logo);
-
     logo = `${this.props.responseUrl}/logo.svg`
     const logoUrl = `${this.props.responseUrl}/logo.svg`
     imageExists(logoUrl, (exists) => {
       if (exists) logo = logoUrl;
-      console.log('logo', logo);
     });
 
     return (

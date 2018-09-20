@@ -80,7 +80,7 @@ class Main extends React.Component {
       responseUrl: `${values.responseUrl ? values.responseUrl : `${window.location.protocol}//${window.location.hostname}:31020`}`
     });
     if (this.state.id !== values.id) this.setState({ id: values.id });
-  }
+  };
 
   handleStatusChange = status => this.setState({ status });
 

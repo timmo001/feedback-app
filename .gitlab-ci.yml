@@ -338,6 +338,15 @@ clair:amd64:
     IMAGE_ARCH: amd64
 
 # Test jobs
+test:
+  stage: test
+  image: node:alpine
+  script:
+    - yarn install && yarn cache clean
+    - yarn run test
+  except:
+    - tags
+
 dep_scan:
   stage: test
   image: docker:stable

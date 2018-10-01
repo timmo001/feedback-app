@@ -3,7 +3,7 @@ import request from 'superagent';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
-import { withStyles } from '@material-ui/core/styles';
+import withStyles from '@material-ui/core/styles/withStyles';
 import green from '@material-ui/core/colors/green';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';

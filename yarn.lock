@@ -28,6 +28,35 @@
   dependencies:
     regenerator-runtime "^0.12.0"
 
+"@devexpress/dx-core@^1.7.2":
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/@devexpress/dx-core/-/dx-core-1.7.2.tgz#4f14694b0447aae3e731aa7b8be824f04894fb13"
+
+"@devexpress/dx-grid-core@^1.7.2":
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/@devexpress/dx-grid-core/-/dx-grid-core-1.7.2.tgz#f4ad4ce155365db73f3cf0e433658e4d0ed9338b"
+
+"@devexpress/dx-react-core@^1.7.2":
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/@devexpress/dx-react-core/-/dx-react-core-1.7.2.tgz#b33129cf4084b2b4f29c6da1c099f506ca60a7b8"
+  dependencies:
+    "@devexpress/dx-core" "^1.7.2"
+    prop-types "^15.6.2"
+
+"@devexpress/dx-react-grid-material-ui@^1.7.2":
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/@devexpress/dx-react-grid-material-ui/-/dx-react-grid-material-ui-1.7.2.tgz#7d4b81ec3c9500e4f42fa3c6a1d7d67b9bfc3c14"
+  dependencies:
+    classnames "^2.2.6"
+    prop-types "^15.6.2"
+
+"@devexpress/dx-react-grid@^1.7.2":
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/@devexpress/dx-react-grid/-/dx-react-grid-1.7.2.tgz#3e50bbab29dfe419d3bcbdf37b7c57a6f7cb015a"
+  dependencies:
+    "@devexpress/dx-grid-core" "^1.7.2"
+    prop-types "^15.6.2"
+
 "@material-ui/core@^3.1.0":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-3.1.0.tgz#40c70e0764ef27dca5e149551577eba10c2e79ce"

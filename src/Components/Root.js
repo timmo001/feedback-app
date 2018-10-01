@@ -4,7 +4,7 @@ import {
   Route
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import withStyles from '@material-ui/core/styles/withStyles';
 import Snackbar from '@material-ui/core/Snackbar';
 import Main from './Main';
 import Admin from './Admin';

@@ -23,26 +23,16 @@ const styles = theme => ({
   margin: {
     margin: `${theme.spacing.unit / 2}px ${theme.spacing.unit}px`,
   },
-  gridStatus: {
-    marginTop: theme.spacing.unit * 2,
-    marginBottom: theme.spacing.unit * 2,
-  },
-  textField: {
-    flexBasis: '50%',
-  },
   card: {
+    maxHeight: '100%',
     margin: theme.spacing.unit,
   },
-  wrapper: {
-    margin: theme.spacing.unit,
-    position: 'relative',
-  },
-  table: {
-    minWidth: 500,
-  },
-  tableWrapper: {
-    overflowX: 'auto',
-  },
+  cardContent: {
+    padding: 0,
+    '&:last-child': {
+      paddingBottom: 0
+    }
+  }
 });
 
 const createData = (id, status, comment) => {
@@ -125,7 +115,7 @@ class Admin extends React.Component {
         container
         alignItems="center"
         justify="center">
-        <Grid item lg={6} md={10} sm={10} xs={12}>
+        <Grid item lg={6} md={10} sm={10} xs={12} className={classes.gridItem}>
           <Card className={classes.card}>
             <Header responseUrl={responseUrl} />
             <CardContent className={classes.cardContent} align="center">

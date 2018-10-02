@@ -19,15 +19,22 @@ import {
   GroupingPanel,
   PagingPanel,
   SearchPanel,
-  Table,
   TableColumnReordering,
   TableColumnVisibility,
   TableGroupRow,
   TableHeaderRow,
-  Toolbar
+  Toolbar,
+  VirtualTable
 } from '@devexpress/dx-react-grid-material-ui';
 
-const styles = () => ({});
+const styles = () => ({
+  tableContainer: {
+    height: '100%'
+  },
+  table: {
+    height: '100%'
+  }
+});
 
 class EnhancedTable extends Component {
   constructor(props) {
@@ -50,21 +57,23 @@ class EnhancedTable extends Component {
     };
   }
 
+  changeColumnOrder = (newOrder) => this.setState({ columnOrder: newOrder });
   changeGrouping = grouping => this.setState({ grouping });
   changeCurrentPage = currentPage => this.setState({ currentPage });
   changePageSize = pageSize => this.setState({ pageSize });
 
   render() {
-    const { data } = this.props;
+    const { classes, data } = this.props;
     const {
       columns, grouping, currentPage,
-      pageSize, tableColumnExtensions, pageSizes
+      pageSize, tableColumnExtensions, pageSizes,
+      columnOrder
     } = this.state;
 
     return (
-      <div className="display-flex">
+      <div className={classes.tableContainer}>
         {data ?
-          <Grid rows={data} columns={columns}>
+          <Grid className={classes.table} rows={data} columns={columns}>
             <DragDropProvider />
             <SortingState defaultSorting={[{ columnName: 'id', direction: 'asc' }]} />
             <GroupingState
@@ -77,15 +86,17 @@ class EnhancedTable extends Component {
               pageSize={pageSize}
               onPageSizeChange={this.changePageSize} />
             <IntegratedGrouping />
-            <IntegratedPaging />
             <IntegratedSorting />
             <IntegratedFiltering />
-            <Table
-              allowColumnReordering
+            <IntegratedPaging />
+            <VirtualTable
+              // height="auto"
               columnExtensions={tableColumnExtensions} />
             <TableGroupRow />
             <TableHeaderRow showSortingControls />
-            <TableColumnReordering defaultOrder={['id', 'status', 'comment']} />
+            <TableColumnReordering
+              order={columnOrder}
+              onOrderChange={this.changeColumnOrder} />
 
             <TableColumnVisibility />
             <Toolbar />

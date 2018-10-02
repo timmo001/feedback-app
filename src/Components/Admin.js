@@ -66,47 +66,49 @@ class Admin extends React.Component {
   };
 
   componentDidMount = () => {
-    const values = queryString.parse(this.props.location.search);
-    if (this.state.responseUrl !== values.responseUrl)
-      this.setState({
-        responseUrl: `${values.responseUrl ? values.responseUrl : `${window.location.protocol}//${window.location.hostname}:31020`}`
-      });
-    const storedToken = sessionStorage.getItem('token');
-    const token = storedToken ? storedToken : prompt('Enter token:');
-    if (token)
-      request
-        .post(`${this.state.responseUrl}/response/get-all`)
-        .send({ token })
-        .timeout({
-          response: 10000,
-          deadline: 60000,
-        })
-        .then(res => {
-          if (res.status === 200) {
-            this.setState({ loading: false, success: true }, () => {
-              console.log('Responses received.');
-              sessionStorage.setItem('token', token);
-              let data = [];
-              res.body.map((i) => data.push(createData(i.id, i.status, i.comment)));
-              this.setState({ data });
-            });
-          } else {
+    this.setState({ loading: true }, () => {
+      const values = queryString.parse(this.props.location.search);
+      if (this.state.responseUrl !== values.responseUrl)
+        this.setState({
+          responseUrl: `${values.responseUrl ? values.responseUrl : `${window.location.protocol}//${window.location.hostname}:31020`}`
+        });
+      const storedToken = sessionStorage.getItem('token');
+      const token = storedToken ? storedToken : prompt('Enter token:');
+      if (token)
+        request
+          .post(`${this.state.responseUrl}/response/get-all`)
+          .send({ token })
+          .timeout({
+            response: 10000,
+            deadline: 60000,
+          })
+          .then(res => {
+            if (res.status === 200) {
+              this.setState({ loading: false, success: true }, () => {
+                console.log('Responses received.');
+                sessionStorage.setItem('token', token);
+                let data = [];
+                res.body.map((i) => data.push(createData(i.id, i.status, i.comment)));
+                this.setState({ data });
+              });
+            } else {
+              sessionStorage.removeItem('token');
+              this.setState({ loading: false, success: false }, () => {
+                console.error(`Error ${res.status}: ${res.body}`);
+              });
+            }
+          })
+          .catch(err => {
             sessionStorage.removeItem('token');
             this.setState({ loading: false, success: false }, () => {
-              console.error(`Error ${res.status}: ${res.body}`);
+              if (err.response) {
+                console.error(`Error: ${err.status} - ${err.response.text}`);
+              } else {
+                console.error(`Error: ${err.message} - Check your credentials and try again`);
+              }
             });
-          }
-        })
-        .catch(err => {
-          sessionStorage.removeItem('token');
-          this.setState({ loading: false, success: false }, () => {
-            if (err.response) {
-              console.error(`Error: ${err.status} - ${err.response.text}`);
-            } else {
-              console.error(`Error: ${err.message} - Check your credentials and try again`);
-            }
           });
-        });
+    });
   };
 
   handleChangePage = (_event, page) => this.setState({ page });
@@ -115,7 +117,7 @@ class Admin extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { responseUrl, data } = this.state;
+    const { loading, responseUrl, data } = this.state;
 
     return (
       <Grid
@@ -130,9 +132,7 @@ class Admin extends React.Component {
               <Typography variant="headline" component="h2">
                 Responses
               </Typography>
-              <Table
-                data={data}
-              />
+              <Table loading={loading} data={data} />
             </CardContent>
           </Card>
         </Grid>

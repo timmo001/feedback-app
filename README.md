@@ -244,7 +244,7 @@ yarn start
 
 - The app should open in your default browser under [http://localhost:3000](http://localhost:3000)
 
-[feedback-api]: https://gitlab.com/timmo/feedback-api
+[feedback-api]: https://github.com/timmo001/feedback-api
 [token-gen]: http://tools.andidittrich.de/Token.html
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg

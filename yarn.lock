@@ -786,19 +786,15 @@
   version "1.10.0"
   resolved "https://registry.yarnpkg.com/@devexpress/dx-core/-/dx-core-1.10.0.tgz#3fe39d57211aecdf54eed093611e74bf6d1fd1be"
 
-"@devexpress/dx-core@^1.7.2":
-  version "1.7.2"
-  resolved "https://registry.yarnpkg.com/@devexpress/dx-core/-/dx-core-1.7.2.tgz#4f14694b0447aae3e731aa7b8be824f04894fb13"
-
 "@devexpress/dx-grid-core@^1.7.2":
   version "1.7.2"
   resolved "https://registry.yarnpkg.com/@devexpress/dx-grid-core/-/dx-grid-core-1.7.2.tgz#f4ad4ce155365db73f3cf0e433658e4d0ed9338b"
 
-"@devexpress/dx-react-core@1.7.2":
-  version "1.7.2"
-  resolved "https://registry.yarnpkg.com/@devexpress/dx-react-core/-/dx-react-core-1.7.2.tgz#b33129cf4084b2b4f29c6da1c099f506ca60a7b8"
+"@devexpress/dx-react-core@1.10.0":
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/@devexpress/dx-react-core/-/dx-react-core-1.10.0.tgz#decee512278268edc9d0ea9eb21ec0edbf33f0f9"
   dependencies:
-    "@devexpress/dx-core" "^1.7.2"
+    "@devexpress/dx-core" "1.10.0"
     prop-types "^15.6.2"
 
 "@devexpress/dx-react-grid-material-ui@1.7.2":

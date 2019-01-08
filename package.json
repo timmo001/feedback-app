@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@devexpress/dx-core": "1.7.2",
+    "@devexpress/dx-core": "1.10.0",
     "@devexpress/dx-react-core": "1.7.2",
     "@devexpress/dx-react-grid": "1.7.2",
     "@devexpress/dx-react-grid-material-ui": "1.7.2",

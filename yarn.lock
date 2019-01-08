@@ -797,9 +797,9 @@
     "@devexpress/dx-core" "^1.7.2"
     prop-types "^15.6.2"
 
-"@devexpress/dx-react-grid-material-ui@1.7.2":
-  version "1.7.2"
-  resolved "https://registry.yarnpkg.com/@devexpress/dx-react-grid-material-ui/-/dx-react-grid-material-ui-1.7.2.tgz#7d4b81ec3c9500e4f42fa3c6a1d7d67b9bfc3c14"
+"@devexpress/dx-react-grid-material-ui@1.10.0":
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/@devexpress/dx-react-grid-material-ui/-/dx-react-grid-material-ui-1.10.0.tgz#9ef9ef56c3f1fab1d14db38072b0f4402a2772ea"
   dependencies:
     classnames "^2.2.6"
     prop-types "^15.6.2"

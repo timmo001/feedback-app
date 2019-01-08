@@ -890,9 +890,9 @@
     prop-types "^15.6.0"
     react-is "^16.6.3"
 
-"@mdi/font@2.8.94":
-  version "2.8.94"
-  resolved "https://registry.yarnpkg.com/@mdi/font/-/font-2.8.94.tgz#b6d55026693f4ac5c38ec01e05e2ec412a215673"
+"@mdi/font@3.3.92":
+  version "3.3.92"
+  resolved "https://registry.yarnpkg.com/@mdi/font/-/font-3.3.92.tgz#9434b92f9810e41d34dd7936e8e1578cd46bebfd"
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"

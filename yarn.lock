@@ -782,7 +782,11 @@
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
 
-"@devexpress/dx-core@1.7.2", "@devexpress/dx-core@^1.7.2":
+"@devexpress/dx-core@1.10.0":
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/@devexpress/dx-core/-/dx-core-1.10.0.tgz#3fe39d57211aecdf54eed093611e74bf6d1fd1be"
+
+"@devexpress/dx-core@^1.7.2":
   version "1.7.2"
   resolved "https://registry.yarnpkg.com/@devexpress/dx-core/-/dx-core-1.7.2.tgz#4f14694b0447aae3e731aa7b8be824f04894fb13"
 

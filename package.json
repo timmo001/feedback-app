@@ -2,6 +2,7 @@
   "name": "feedback-app",
   "version": "1.0.0",
   "private": true,
+  "author": "Timmo <contact@timmo.xyz> (https://git.timmo.xyz)",
   "dependencies": {
     "@devexpress/dx-core": "1.10.0",
     "@devexpress/dx-react-core": "1.10.0",
@@ -25,10 +26,13 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "eslint": "eslint -c .eslintrc.json --color src"
   },
-  "devDependencies": {
-    "eslint": "5.12.0",
-    "eslint-plugin-react": "7.12.3"
-  }
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

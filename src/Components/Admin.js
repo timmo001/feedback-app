@@ -49,7 +49,7 @@ const createData = (id, status, comment) => {
 
 class Admin extends React.Component {
   state = {
-    responseUrl: `${window.location.protocol}//${window.location.hostname}:31020`,
+    responseUrl: `${window.location.protocol}//${window.location.hostname}${process.env.REACT_APP_API_PORT && `:${process.env.REACT_APP_API_PORT}`}`,
     loading: false,
     success: false,
     data: []
@@ -60,7 +60,7 @@ class Admin extends React.Component {
       const values = queryString.parse(this.props.location.search);
       if (this.state.responseUrl !== values.responseUrl)
         this.setState({
-          responseUrl: `${values.responseUrl ? values.responseUrl : `${window.location.protocol}//${window.location.hostname}:31020`}`
+          responseUrl: `${values.responseUrl ? values.responseUrl : `${window.location.protocol}//${window.location.hostname}${process.env.REACT_APP_API_PORT && `:${process.env.REACT_APP_API_PORT}`}`}`
         });
       const storedToken = sessionStorage.getItem('token');
       const token = storedToken ? storedToken : prompt('Enter token:');

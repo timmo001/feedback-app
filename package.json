@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "author": "Timmo <contact@timmo.xyz> (https://git.timmo.xyz)",
+  "homepage": "./",
   "dependencies": {
     "@devexpress/dx-core": "1.10.0",
     "@devexpress/dx-react-core": "1.10.0",

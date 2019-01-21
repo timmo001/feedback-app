@@ -43,8 +43,8 @@ class Root extends Component {
     return (
       <Router>
         <div className={classes.root}>
-          <Route exact path="/" component={Main} />
-          <Route exact path="/admin" component={Admin} />
+          <Route exact path="/app" component={Main} />
+          <Route exact path="/app/admin" component={Admin} />
           <Snackbar
             open={snackMessage.open}
             autoHideDuration={2000}

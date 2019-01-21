@@ -49,7 +49,7 @@ const createData = (id, status, comment) => {
 
 class Admin extends React.Component {
   state = {
-    responseUrl: `${window.location.protocol}//${window.location.hostname}${process.env.REACT_APP_API_PORT && `:${process.env.REACT_APP_API_PORT}`}`,
+    apiUrl: `${window.location.protocol}//${window.location.hostname}${process.env.REACT_APP_API_PORT && `:${process.env.REACT_APP_API_PORT}`}`,
     loading: false,
     success: false,
     data: []
@@ -58,15 +58,14 @@ class Admin extends React.Component {
   componentDidMount = () => {
     this.setState({ loading: true }, () => {
       const values = queryString.parse(this.props.location.search);
-      if (this.state.responseUrl !== values.responseUrl)
-        this.setState({
-          responseUrl: `${values.responseUrl ? values.responseUrl : `${window.location.protocol}//${window.location.hostname}${process.env.REACT_APP_API_PORT ? `:${process.env.REACT_APP_API_PORT}` : ''}`}`
-        });
+      this.setState({
+        apiUrl: `${values.apiUrl ? values.apiUrl : `${window.location.protocol}//${window.location.hostname}${process.env.REACT_APP_API_PORT ? `:${process.env.REACT_APP_API_PORT}` : ''}`}`
+      });
       const storedToken = sessionStorage.getItem('token');
       const token = storedToken ? storedToken : prompt('Enter token:');
       if (token)
         request
-          .post(`${this.state.responseUrl}/response/get-all`)
+          .post(`${this.state.apiUrl}/api/response/get-all`)
           .send({ token })
           .timeout({
             response: 10000,
@@ -107,7 +106,7 @@ class Admin extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { loading, responseUrl, data } = this.state;
+    const { loading, apiUrl, data } = this.state;
 
     return (
       <Grid
@@ -117,7 +116,7 @@ class Admin extends React.Component {
         justify="center">
         <Grid item lg={6} md={10} sm={10} xs={12} className={classes.gridItem}>
           <Card className={classes.card}>
-            <Header responseUrl={responseUrl} />
+            <Header apiUrl={apiUrl} />
             <CardContent className={classes.cardContent} align="center">
               <Typography variant="headline" component="h2">
                 Responses

@@ -19,11 +19,11 @@ const styles = theme => ({
 class Header extends React.Component {
 
   render() {
-    const { classes } = this.props;
+    const { classes, apiUrl } = this.props;
 
     var logo = Logo;
-    logo = `${this.props.responseUrl}/logo.svg`
-    const logoUrl = `${this.props.responseUrl}/logo.svg`
+    logo = `${apiUrl}/logo.svg`;
+    const logoUrl = `${apiUrl}/logo.svg`;
     imageExists(logoUrl, (exists) => {
       if (exists) logo = logoUrl;
     });

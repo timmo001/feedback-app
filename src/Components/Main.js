@@ -69,15 +69,14 @@ const styles = theme => ({
 class Main extends React.Component {
   state = {
     comment: '',
-    responseUrl: `${window.location.protocol}//${window.location.hostname}${process.env.REACT_APP_API_PORT ? `:${process.env.REACT_APP_API_PORT}` : ''}`,
     loading: false,
     success: false,
   };
 
   componentDidMount = () => {
     const values = queryString.parse(this.props.location.search);
-    if (this.state.responseUrl !== values.responseUrl) this.setState({
-      responseUrl: `${values.responseUrl ? values.responseUrl : `${window.location.protocol}//${window.location.hostname}${process.env.REACT_APP_API_PORT ? `:${process.env.REACT_APP_API_PORT}` : ''}`}`
+    this.setState({
+      apiUrl: `${values.apiUrl ? values.apiUrl : `${window.location.protocol}//${window.location.hostname}${process.env.REACT_APP_API_PORT ? `:${process.env.REACT_APP_API_PORT}` : ''}`}`
     });
     if (this.state.id !== values.id) this.setState({ id: values.id });
   };
@@ -89,7 +88,7 @@ class Main extends React.Component {
   handleSend = () => {
     this.setState({ success: false, loading: true, }, () => {
       request
-        .post(`${this.state.responseUrl}/response`)
+        .post(`${this.state.apiUrl}/api/response`)
         .send({
           id: this.state.id ? this.state.id : -1,
           status: this.state.status,
@@ -125,12 +124,13 @@ class Main extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { status, comment, loading, success, responseUrl } = this.state;
+    const { status, comment, loading, success, apiUrl } = this.state;
     const buttonClassname = classNames({
       [classes.buttonSuccess]: success,
     });
 
-    return (
+    if (!apiUrl) return null;
+    else return (
       <Grid
         className={classes.grid}
         container
@@ -138,7 +138,7 @@ class Main extends React.Component {
         justify="center">
         <Grid item lg={6} md={10} sm={10} xs={12}>
           <Card className={classes.card}>
-            <Header responseUrl={responseUrl} />
+            <Header apiUrl={apiUrl} />
             {!success ?
               <div>
                 <CardContent className={classes.cardContent} align="center">

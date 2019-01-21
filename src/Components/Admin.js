@@ -60,7 +60,7 @@ class Admin extends React.Component {
       const values = queryString.parse(this.props.location.search);
       if (this.state.responseUrl !== values.responseUrl)
         this.setState({
-          responseUrl: `${values.responseUrl ? values.responseUrl : `${window.location.protocol}//${window.location.hostname}${process.env.REACT_APP_API_PORT && `:${process.env.REACT_APP_API_PORT}`}`}`
+          responseUrl: `${values.responseUrl ? values.responseUrl : `${window.location.protocol}//${window.location.hostname}${process.env.REACT_APP_API_PORT ? `:${process.env.REACT_APP_API_PORT}` : ''}`}`
         });
       const storedToken = sessionStorage.getItem('token');
       const token = storedToken ? storedToken : prompt('Enter token:');

@@ -42,13 +42,13 @@ RUN \
         yarn=1.12.3-r0 \
     \
     && apk add --no-cache \
-        apk-tools=2.10.1-r0 \
+        apk-tools=2.10.3-r1 \
         bash=4.4.19-r1 \
-        busybox=1.28.4-r3 \
-        ca-certificates=20171114-r3 \
+        busybox=1.29.3-r10 \
+        ca-certificates=20190108-r0 \
         nginx=1.14.2-r0 \
-        nodejs-current=9.11.1-r2 \
-        tzdata=2018f-r0 \
+        nodejs-current=11.3.0-r0 \
+        tzdata=2018i-r0 \
     \
     && if [ "${BUILD_ARCH}" = "i386" ]; then S6_ARCH="x86"; else S6_ARCH="${BUILD_ARCH}"; fi \
     \

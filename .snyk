@@ -1,0 +1,26 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.13.5
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-LODASH-450202:
+    - react-scripts > eslint > lodash:
+        patched: '2019-07-04T03:42:36.955Z'
+    - react-scripts > webpack-manifest-plugin > lodash:
+        patched: '2019-07-04T03:42:36.955Z'
+    - react-scripts > eslint > table > lodash:
+        patched: '2019-07-04T03:42:36.955Z'
+    - react-scripts > optimize-css-assets-webpack-plugin > last-call-webpack-plugin > lodash:
+        patched: '2019-07-04T03:42:36.955Z'
+    - react-scripts > webpack-dev-server > http-proxy-middleware > lodash:
+        patched: '2019-07-04T03:42:36.955Z'
+    - react-scripts > jest > jest-cli > jest-environment-jsdom > jsdom > request-promise-native > request-promise-core > lodash:
+        patched: '2019-07-04T03:42:36.955Z'
+    - react-scripts > jest > jest-cli > jest-config > jest-environment-jsdom > jsdom > request-promise-native > request-promise-core > lodash:
+        patched: '2019-07-04T03:42:36.955Z'
+    - react-scripts > jest > jest-cli > jest-runtime > jest-config > jest-environment-jsdom > jsdom > request-promise-native > request-promise-core > lodash:
+        patched: '2019-07-04T03:42:36.955Z'
+    - react-scripts > jest > jest-cli > jest-runner > jest-config > jest-environment-jsdom > jsdom > request-promise-native > request-promise-core > lodash:
+        patched: '2019-07-04T03:42:36.955Z'
+    - react-scripts > jest > jest-cli > jest-runner > jest-runtime > jest-config > jest-environment-jsdom > jsdom > request-promise-native > request-promise-core > lodash:
+        patched: '2019-07-04T03:42:36.955Z'
